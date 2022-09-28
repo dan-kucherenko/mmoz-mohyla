@@ -13,13 +13,16 @@ int main(void) {
 	string imageName("D:/dev/MMOZ/Tif/IM1.tif");
 	int rows = 512, cols = 512;
 	Mat image = imread(imageName.c_str(), IMREAD_GRAYSCALE);
-	if (image.data == 0)
+	if (image.data == 0) {
 		cout << "Couldn't open or find the given image path" << endl;
-
-	Mat outImage(image.rows / 2, image.cols / 2, CV_8UC1);
-	decreaseImageScale(image, outImage);
-
-	imshow("Decreased image", outImage);
+		return -1;
+	}
+	Mat decreasedImage(image.rows / 2, image.cols / 2, CV_8UC1);
+	Mat increasedImage(image.rows * 2, image.cols * 2, CV_8UC1, Scalar(25));
+	decreaseImageScale(image, decreasedImage);
+	increaseImageScale(image, increasedImage);
+	imshow("Decreased image", decreasedImage);
+	imshow("Increased image", increasedImage);
 	imshow("Default image", image);
 	waitKey(0);
 	return 0;
