@@ -18,7 +18,7 @@ int main(void) {
 		return -1;
 	}
 	Mat decreasedImage(image.rows / 2, image.cols / 2, CV_8UC1);
-	Mat increasedImage(image.rows * 2, image.cols * 2, CV_8UC1, Scalar(25));
+	Mat increasedImage(image.rows * 2, image.cols * 2, CV_8UC1);
 	decreaseImageScale(image, decreasedImage);
 	increaseImageScale(image, increasedImage);
 	imshow("Decreased image", decreasedImage);
