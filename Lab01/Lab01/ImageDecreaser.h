@@ -1,3 +1,4 @@
 #include <opencv2/core/core.hpp>
 #pragma once
-void decreaseImageScale(const cv::Mat in_image, cv::Mat& out_image, int n = 2);
+
+void decrease_image_scale(const cv::Mat& in_image,const cv::Mat& out_image, const int n = 2);
