@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{df68a83b-82ef-4bdb-815c-24ca17ded615}</ProjectGuid>
-    <RootNamespace>Lab01</RootNamespace>
+    <ProjectGuid>{8d342976-7bb1-4896-a636-67c66cafa86f}</ProjectGuid>
+    <RootNamespace>My02Pract</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Lab01_Kucherenko</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -133,13 +132,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ImageDecreaser.h" />
-    <ClInclude Include="ImageIncreaser.h" />
+    <ClCompile Include="HistogramEqualization.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ImageDecreaser.cpp" />
-    <ClCompile Include="ImageIncreaser.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClInclude Include="HistogramEqualization.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
