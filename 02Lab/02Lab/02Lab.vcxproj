@@ -132,9 +132,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="HistogramBuilder.h" />
     <ClInclude Include="HistogramEqualisation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HistogramBuilder.cpp" />
     <ClCompile Include="HistogramEqualisation.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

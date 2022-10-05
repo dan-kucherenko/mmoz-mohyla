@@ -1,6 +1,5 @@
 #include <opencv2/core/core.hpp>
 
-
 void histogram_equalisation(const cv::Mat& in_image, cv::Mat& out_image, cv::Mat& in_histogram, cv::Mat& out_histogram) {
 	const size_t size_hist = 256;
 	const size_t size_data = in_image.rows * in_image.cols;
