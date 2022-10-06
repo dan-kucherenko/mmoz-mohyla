@@ -5,8 +5,8 @@
 using namespace std;
 using namespace cv;
 
-Mat build_histogram(Mat& image) {
-	Mat src = image;
+Mat build_histogram(const Mat& image) {
+	Mat src = image.clone();
 	if (!src.data) 
 		return src;
 	vector<Mat> plane;

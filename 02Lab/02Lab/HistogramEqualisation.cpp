@@ -1,6 +1,9 @@
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core/mat.hpp>
+#include "HistogramBuilder.h"
 
-void histogram_equalisation(const cv::Mat& in_image, cv::Mat& out_image, cv::Mat& in_histogram, cv::Mat& out_histogram) {
+void histogram_equalisation(const cv::Mat& in_image, const cv::Mat& out_image, cv::Mat& in_histogram, cv::Mat& out_histogram) {
 	const size_t size_hist = 256;
 	const size_t size_data = in_image.rows * in_image.cols;
 	const float alpha = 255.0 / size_data;
@@ -23,5 +26,8 @@ void histogram_equalisation(const cv::Mat& in_image, cv::Mat& out_image, cv::Mat
 	}
 	delete[]hist_cum;
 	delete[]hist;
+	// plotting the histogram
+	in_histogram = build_histogram(in_image);
+	out_histogram = build_histogram(out_image);
 }
 
