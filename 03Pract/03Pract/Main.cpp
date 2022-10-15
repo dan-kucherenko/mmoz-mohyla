@@ -19,7 +19,7 @@ int main(void) {
 	double mask[9] = {1,1,1,
 					  1,4,1,
 					  1,1,1 };
-	double k = 1.0 / 13.0;
+	double k = 1.0 / 12.0;
 	convolution(image, mask, 3, k, out);
 	imshow("Image_in", image);
 	imshow("Image_out", out);
