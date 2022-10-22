@@ -1,6 +1,9 @@
 #include "SobelOperator.h"
+
+#include <iostream>
+#include <ostream>
 using namespace cv;
-void convolution(const Mat& in_image, const double* mask, int ksize, Mat& out_image) {
+void convolution(const Mat& in_image, const double* mask, int ksize, Mat& out_image, bool ignoreNegVal, double koef = 1) {
 	int sum = 0;
 	int* temp = new int[in_image.total()];
 
@@ -15,16 +18,26 @@ void convolution(const Mat& in_image, const double* mask, int ksize, Mat& out_im
 					sum += in_image.data[(i + a - ksize / 2) * in_image.cols + j - b - ksize / 2] * mask[a * ksize + b];
 				}
 			}
-			temp[i * in_image.cols + j] = sum;
+			temp[i * in_image.cols + j] = sum * koef;
 		}
 	}
-	for (int i = 0; i < in_image.rows * in_image.cols; i++) {
-		int val = temp[i];
-		if (val < 0)
-			val = 0;
-		if (val > 255)
-			val = 255;
-		out_image.data[i] = val;
+	//for (int i = 0; i < in_image.rows; i++) {
+	//	for (int j = 0; j < in_image.cols; j++)
+	//		std::cout << *(temp+i);
+	//	std::cout << std::endl;
+	//}
+	if (!ignoreNegVal) {
+		for (int i = 0; i < in_image.rows * in_image.cols; i++) {
+			int val = temp[i];
+			if (val < 0)
+				val = 0;
+			if (val > 255)
+				val = 255;
+			out_image.data[i] = val;
+		}
+	} else {
+		for (size_t i = 0; i < in_image.total(); i++)
+			out_image.data[i] = temp[i];
 	}
 	delete[]temp;
 }
@@ -43,13 +56,13 @@ void gaussian_blur(const Mat& in_image, Mat& out_image, const int ksize, double 
 		}
 		y++;
 	}
-	convolution(in_image, mask, ksize, out_image);
+	convolution(in_image, mask, ksize, out_image, false, 1 / sum);
 	delete[] mask;
 }
 
-void sobel_operator(const Mat& in_image, Mat& out_image) {
+void sobel_operator(const Mat& in_image, Mat& out_image, Mat& g_x, Mat& g_y) {
 	Mat temp = in_image.clone();
-	gaussian_blur(in_image, temp, 3,0.9);
+	gaussian_blur(in_image, temp, 5, 0.9);
 	const double sobel_xmask[] = {
 		-1, 0, 1,
 		-2, 0, 2,
@@ -60,15 +73,15 @@ void sobel_operator(const Mat& in_image, Mat& out_image) {
 		0, 0, 0,
 		-1, 2, 1
 	};
-	Mat g_x(in_image.rows, in_image.cols, CV_32F, Scalar(0));
-	Mat g_y(in_image.rows, in_image.cols, CV_32F, Scalar(0));
-	convolution(temp, sobel_xmask, 3, g_x);
-	convolution(temp, sobel_ymask, 3, g_y);
+	/*Mat g_x(in_image.rows, in_image.cols, CV_32F, Scalar(0));
+	Mat g_y(in_image.rows, in_image.cols, CV_32F, Scalar(0));*/
+	convolution(temp, sobel_xmask, 3, g_x, true);
+	convolution(temp, sobel_ymask, 3, g_y, true);
 
 	for (size_t i = 0; i < in_image.total(); i++) {
-		int temp_pyth = static_cast<int>(sqrt(pow(g_x.data[i], 2) + pow(g_y.data[i], 2)));
+		int temp_pyth = sqrt(pow(g_x.data[i], 2) + pow(g_y.data[i], 2));
 		if (temp_pyth > 255)
 			temp_pyth = 255;
-		out_image.data[i] = static_cast<uchar>(temp_pyth);
+		out_image.data[i] = temp_pyth;
 	}
 }
