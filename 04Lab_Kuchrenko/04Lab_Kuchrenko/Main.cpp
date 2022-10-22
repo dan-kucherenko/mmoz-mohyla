@@ -7,7 +7,7 @@ using namespace cv;
 
 int main(void) {
 	string str = "Image";
-	string imageName("D:/dev/MMOZ/Tif/Geneva.tif");
+	string imageName("C:/dev/MMOZ/Tif/Geneva.tif");
 	Mat image = imread(imageName, IMREAD_GRAYSCALE);
 	if (image.data == 0) {
 		cout << "Could not open or find the image" << endl;
@@ -15,14 +15,11 @@ int main(void) {
 	}
 	Mat sobel_image(image.rows, image.cols, CV_8UC1, Scalar(0));
 	Mat sobel_lib_image(image.rows, image.cols, CV_8UC1, Scalar(0));
-	Mat g_x(image.rows, image.cols, CV_8UC1, Scalar(0));
-	Mat g_y(image.rows, image.cols, CV_8UC1, Scalar(0));
-	sobel_operator(image, sobel_image, g_x, g_y);
+
+	sobel_operator(image, sobel_image);
 	Sobel(image, sobel_lib_image, -1, 1, 1);
 	imshow("Original image", image);
 	imshow("Sobel-filtered image", sobel_image);
-	imshow("Sobel-g_x image", g_x);
-	imshow("Sobel-g_y image", g_y);
 	imshow("Sobel-lib-filtered image", sobel_lib_image);
 	waitKey(0);
 	return 0;
