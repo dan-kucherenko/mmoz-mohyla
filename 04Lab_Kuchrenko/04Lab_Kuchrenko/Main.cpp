@@ -14,7 +14,7 @@ int main(void) {
 		return -1;
 	}
 	Mat sobel_image(image.rows, image.cols, CV_8UC1, Scalar(0));
-	Mat sobel_lib_image(image.rows, image.cols, CV_64F, Scalar(0));
+	Mat sobel_lib_image(image.rows, image.cols, CV_8UC1, Scalar(0));
 	sobel_operator(image, sobel_image);
 	Sobel(image, sobel_lib_image, -1, 1, 1);
 	imshow("Original image", image);

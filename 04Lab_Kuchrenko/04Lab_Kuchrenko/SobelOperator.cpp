@@ -49,21 +49,26 @@ void gaussian_blur(const Mat& in_image, Mat& out_image, const int ksize, double 
 
 void sobel_operator(const Mat& in_image, Mat& out_image) {
 	Mat temp = in_image.clone();
-	gaussian_blur(in_image, temp, 3, 0.8);
-	const double* sobel_xmask = new double[9] { -1, 0, 1, -2, 0, 2, -1, 0, 1 };
-	const double* sobel_ymask = new double[9] { -1, -2, 1, 0, 0, 0, -1, 2, 1 };
-
-	Mat g_x(in_image.rows, in_image.cols, CV_16S, Scalar(0));
-	Mat g_y(in_image.rows, in_image.cols, CV_16S, Scalar(0));
+	gaussian_blur(in_image, temp, 3,0.9);
+	const double sobel_xmask[] = {
+		-1, 0, 1,
+		-2, 0, 2,
+		-1, 0, 1
+	};
+	const double sobel_ymask[] = {
+		-1, -2, 1,
+		0, 0, 0,
+		-1, 2, 1
+	};
+	Mat g_x(in_image.rows, in_image.cols, CV_32F, Scalar(0));
+	Mat g_y(in_image.rows, in_image.cols, CV_32F, Scalar(0));
 	convolution(temp, sobel_xmask, 3, g_x);
 	convolution(temp, sobel_ymask, 3, g_y);
 
-	for (size_t i = 0; i < in_image.rows; i++) {
-		for (size_t j = 0; j < in_image.cols; j++) {
-			out_image.data[i * in_image.cols + j] = sqrt(pow(g_x.data[i * in_image.cols + j], 2)
-				+ pow(g_y.data[i * in_image.cols + j], 2));
-		}
+	for (size_t i = 0; i < in_image.total(); i++) {
+		int temp_pyth = static_cast<int>(sqrt(pow(g_x.data[i], 2) + pow(g_y.data[i], 2)));
+		if (temp_pyth > 255)
+			temp_pyth = 255;
+		out_image.data[i] = static_cast<uchar>(temp_pyth);
 	}
-	delete[]sobel_xmask;
-	delete[]sobel_ymask;
 }
