@@ -55,13 +55,11 @@ void gaussian_blur(const Mat& in_image, Mat& out_image, const int ksize, double 
 	delete[] mask;
 }
 
-void sobel_operator(const Mat& in_image, Mat& out_image) {
+void sobel_operator(const Mat& in_image, Mat& out_image, int *g_x, int *g_y) {
 	Mat temp = in_image.clone();
 	gaussian_blur(in_image, temp, 5, 0.9);
 	const double sobel_xmask[] = { -1, 0, 1, -2, 0, 2,-1, 0, 1 };
 	const double sobel_ymask[] = { -1, -2, 1,0, 0, 0,-1, 2, 1 };
-	int* g_x = new int[in_image.total()];
-	int* g_y = new int[in_image.total()];
 	convolution<unsigned char, int>(temp.data, sobel_xmask, 3, g_x, in_image.rows, in_image.cols, 1, false);
 	convolution<unsigned char, int>(temp.data, sobel_ymask, 3, g_y, in_image.rows, in_image.cols, 1, false);
 
@@ -71,7 +69,5 @@ void sobel_operator(const Mat& in_image, Mat& out_image) {
 			temp_pyth = 255;
 		out_image.data[i] = static_cast<unsigned char>(temp_pyth);
 	}
-	delete[]g_x;
-	delete[]g_y;
 }
 
