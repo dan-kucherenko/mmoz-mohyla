@@ -18,13 +18,13 @@ int main(void) {
 	Mat sobel_image(image.rows, image.cols, CV_8UC1, Scalar(0));
 	Mat canny_lib_image(image.rows, image.cols, CV_8UC1, Scalar(0));
 
-	canny_operator(image, canny_image, 70, 210);
+	canny_operator(image, canny_image, 20, 90);
 	sobel_operator(image, sobel_image);
-	Canny(image, canny_lib_image, 70, 210);
+	//Canny(image, canny_lib_image, 70, 210);
 	imshow("Original image", image);
 	imshow("Sobel image", sobel_image);
 	imshow("Canny-filtered image", canny_image);
-	imshow("Canny-lib-filtered image", canny_lib_image);
+	//imshow("Canny-lib-filtered image", canny_lib_image);
 	waitKey(0);
 	return 0;
 }
