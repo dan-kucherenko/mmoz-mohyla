@@ -38,3 +38,16 @@ void erosion(const cv::Mat& in_image, cv::Mat& out_image) {
 	}
 }
 
+void getBorders(const cv::Mat& in_image, cv::Mat& out_image) {
+	cv::Mat temp(in_image.rows, in_image.cols, CV_8UC1, cv::Scalar(0));
+	erosion(in_image, temp);
+	out_image = in_image.clone();
+	for (int y = 1; y < in_image.rows - 1; y++) {
+		for (int x = 1; x < in_image.cols - 1; x++) {
+			if (out_image.data[x * in_image.rows + y] <= temp.data[x * in_image.rows + y])
+				out_image.data[x * in_image.rows + y] = 0;
+			else
+				out_image.data[x * in_image.rows + y] = 255;
+		}
+	}
+}
