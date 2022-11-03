@@ -10,6 +10,7 @@ int main(void) {
 	string imageName("D:/dev/MMOZ/Tif/contour.tif");
 	Mat image = imread(imageName, IMREAD_GRAYSCALE);
 	Mat erosed_image(image.rows, image.cols, CV_8UC1, Scalar(0));
+	
 	if (image.data == 0) {
 		cout << "Could not open or find the image" << endl;
 		return -1;
