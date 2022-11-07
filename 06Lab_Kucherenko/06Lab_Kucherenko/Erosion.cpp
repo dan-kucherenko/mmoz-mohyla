@@ -29,13 +29,6 @@ void erosion(const cv::Mat& in_image, cv::Mat& out_image) {
 		for (int x = 0; x < in_image.cols; x++) {
 			const unsigned char* cur_input_pixel = &in_image.data[x * in_image.rows + y];
 			unsigned char* cur_output_pixel = &out_image.data[x * in_image.rows + y];
-			/*for (int i = -pow(primitive_size, 2) / 2, j = 0; i < pow(primitive_size, 2) / 2 && j < pow(primitive_size, 2); i++, j++) {
-				if (*(cur_output_pixel + i) != primitive[j]) {
-					*cur_output_pixel = 0;
-					break;
-				}
-				*cur_output_pixel = 255;
-			}*/
 			if (check_erosion_primitive(cur_input_pixel, primitive, primitive_size))
 				*cur_output_pixel = 255;
 			else
