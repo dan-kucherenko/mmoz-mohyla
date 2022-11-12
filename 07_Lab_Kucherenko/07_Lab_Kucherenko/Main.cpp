@@ -14,7 +14,7 @@ int main(void) {
 		cout << "Could not open or find the image" << endl;
 		return -1;
 	}
-	region_growth(image, marked_image, 255, 100);
+	region_growth(image, marked_image, 20, 15);
 	imshow("Input image", image);
 	imshow("Image after marking alg.", marked_image);
 	waitKey(0);

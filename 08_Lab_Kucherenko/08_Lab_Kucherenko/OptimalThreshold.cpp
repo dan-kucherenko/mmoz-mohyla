@@ -21,10 +21,10 @@ double nu_first(int threshold_av, const cv::Mat& histogram)
 }
 
 
-void optimal_threshold(const cv::Mat& input, cv::Mat& output)
+void optimal_threshold(const cv::Mat& histogram)
 {
-	double nu_zero_val = nu_zero(128, input);
-	double nu_first_val = nu_first(128, input);
+	double nu_zero_val = nu_zero(128, histogram);
+	double nu_first_val = nu_first(128, histogram);
 	while (true)
 	{
 		
