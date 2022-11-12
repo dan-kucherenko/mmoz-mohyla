@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HistogramBuilder.cpp" />
+    <ClCompile Include="HistogramEqualisation.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OptimalThreshold.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HistogramBuilder.h" />
+    <ClInclude Include="HistogramEqualisation.h" />
     <ClInclude Include="OptimalThreshold.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
