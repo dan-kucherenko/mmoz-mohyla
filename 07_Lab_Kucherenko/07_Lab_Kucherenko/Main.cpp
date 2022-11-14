@@ -7,7 +7,7 @@ using namespace cv;
 
 int main(void) {
 	string str = "Image";
-	string imageName("C:/dev/MMOZ/Tif/IM11.tif");
+	string imageName("D:/dev/MMOZ/Tif/IM11.tif");
 	//string imageName("C:/dev/MMOZ/Tif/contour.tif");
 	Mat image = imread(imageName, IMREAD_GRAYSCALE);
 	Mat marked_image(image.rows, image.cols, CV_8UC1, Scalar(0));
@@ -17,7 +17,7 @@ int main(void) {
 		return -1;
 	}
 	region_growth(image, marked_image, 128, 100);
-	region_growth(image, marked_image_coord, 150, 200, 80);
+	region_growth(image, marked_image_coord, 250, 250, 60);
 	imshow("Input image", image);
 	imshow("Image after marking alg.", marked_image);
 	imshow("Image (coord) after marking alg.", marked_image_coord);

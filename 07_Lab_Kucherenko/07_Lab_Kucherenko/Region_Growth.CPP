@@ -34,7 +34,7 @@ void check_neighbors(unsigned char* root_pixel, std::vector<unsigned char*>& nei
 		for (int x = -mask_size/2; x < mask_size/2; x++) {
 			unsigned char* neighbor_pixel = root_pixel + (x* rows + y);
 			if (neighbor_pixel != root_pixel && neighbor_pixel != seed && neighbor_pixel  != nullptr) {
-				if (*seed - *neighbor_pixel < pixel_threshold) {
+				if (*seed - *neighbor_pixel <= pixel_threshold) {
 					if (!marked_pix[neighbor_pixel]) {
 						neighbor_pixels.push_back(neighbor_pixel);
 						marked_pix[neighbor_pixel] = 1;
