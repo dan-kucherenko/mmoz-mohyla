@@ -17,7 +17,7 @@ int main(void) {
 		return -1;
 	}
 	region_growth(image, marked_image, 128, 100);
-	region_growth(image, marked_image_coord, 250, 250, 60);
+	//region_growth(image, marked_image_coord, 150, 200, 80);
 	imshow("Input image", image);
 	imshow("Image after marking alg.", marked_image);
 	imshow("Image (coord) after marking alg.", marked_image_coord);
