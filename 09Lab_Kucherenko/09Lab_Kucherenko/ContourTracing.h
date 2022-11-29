@@ -1,4 +1,4 @@
 #pragma once
 #include <vector>
 #include <opencv2/core/mat.hpp>
-std::vector<cv::Point> contour_tracing(const cv::Mat& input);
+void contour_tracing(const cv::Mat& original, cv::Mat& boundaries, std::vector<cv::Point>& contour_points);
