@@ -1,2 +1,2 @@
 # mmoz-mohyla
-Repository for Mathematical methods of image processing subj,
+Repository for MMOZ 2022 course in KMA
